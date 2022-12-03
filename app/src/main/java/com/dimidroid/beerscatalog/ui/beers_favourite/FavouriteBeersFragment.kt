@@ -28,9 +28,9 @@ class FavouriteBeersFragment : Fragment() {
         _binding = FragmentFavouriteBeersBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
+
         beersFavouriteViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+
         }
         return root
     }

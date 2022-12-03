@@ -7,36 +7,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.dimidroid.beerscatalog.R
 import com.dimidroid.beerscatalog.databinding.FragmentBeersCatalogBinding
 
-class BeersCatalogFragment : Fragment() {
+class BeersCatalogFragment : Fragment(R.layout.fragment_beers_catalog) {
 
-    private var _binding: FragmentBeersCatalogBinding? = null
+    lateinit var beersCatalogViewModel: BeersCatalogViewModel
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val beersCatalogViewModel =
-            ViewModelProvider(this).get(BeersCatalogViewModel::class.java)
-
-        _binding = FragmentBeersCatalogBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        beersCatalogViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        //beersCatalogViewModel =
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

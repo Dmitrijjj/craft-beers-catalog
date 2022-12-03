@@ -28,9 +28,9 @@ class BeersDetailsFragment : Fragment() {
         _binding = FragmentBeersDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
+
         beersDetailsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+
         }
         return root
     }

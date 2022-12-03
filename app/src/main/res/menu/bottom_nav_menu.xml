@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_beers_catalog"
         android:icon="@drawable/ic_beers_catalog"
-        android:title="@string/title_beers_catalog" />
+        android:title="@string/title_beers_catalog"/>
 
     <item
         android:id="@+id/navigation_favourite_beers"
