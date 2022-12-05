@@ -1,4 +1,4 @@
-package com.dimidroid.beerscatalog
+package com.dimidroid.beerscatalog.ui
 
 import androidx.lifecycle.ViewModelProvider
 
