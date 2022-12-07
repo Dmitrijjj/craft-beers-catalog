@@ -17,21 +17,20 @@ class Converters {
         return listOf(string)
     }
 
-    //function TypeConverter has never used error
     @TypeConverter
-    fun fromIngredients(hops: List<Hop>, malt: List<Malt>, yeast: String): String {
-        val hopsStr = hops.joinToString(",")
-        val maltStr = malt.joinToString(",")
-        return hopsStr + "" + maltStr + "" + yeast
+    fun fromIngredients(ingredients: Ingredients): String {
+        return ingredients.hops.toString() + "\n" +
+                ingredients.malt.toString() + "\n" +
+                ingredients.yeast
     }
-    //error here
+
     @TypeConverter
     fun toIngredients(string: String): Ingredients {
         val lines = string.lines()
         val hops = lines[0] as List<Hop>
-        val malts = lines[1] as List<Malt>
+        val malt = lines[1] as List<Malt>
         val yeast = lines[2]
-        return Ingredients(hops, malts, yeast)
+        return Ingredients(hops, malt, yeast)
     }
 
 }

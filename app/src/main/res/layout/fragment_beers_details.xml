@@ -21,28 +21,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/beer_info_tv_malt"
+        android:id="@+id/beer_info_tv_ingredients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="24dp"
-        android:text="Malt:"
+        android:text="Ingredients:"
         android:textColor="@color/black"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/beer_info_tv_description" />
-
-    <TextView
-        android:id="@+id/beer_info_tv_hops"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
-        android:text="Hops:"
-        android:textColor="@color/black"
-        android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beer_info_tv_malt" />
 
     <TextView
         android:id="@+id/beer_info_tv_foodPairing"
@@ -54,5 +42,5 @@
         android:textColor="@color/black"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beer_info_tv_hops" />
+        app:layout_constraintTop_toBottomOf="@+id/beer_info_tv_ingredients" />
 </androidx.constraintlayout.widget.ConstraintLayout>
