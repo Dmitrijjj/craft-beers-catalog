@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "beers_table")
 data class BeerResponseItem(
     //for icon in recyclerView
-    val isFavourite: Boolean = false,
+    var isFavourite: Boolean = false,
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     val id: Int,

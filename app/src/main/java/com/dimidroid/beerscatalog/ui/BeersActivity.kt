@@ -13,6 +13,7 @@ import com.dimidroid.beerscatalog.databinding.ActivityBeersBinding
 class BeersActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBeersBinding
+    private lateinit var viewModel: BeersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
