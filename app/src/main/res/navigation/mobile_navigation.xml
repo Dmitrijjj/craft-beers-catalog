@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_favourite_beers"
-        android:name="com.dimidroid.beerscatalog.ui.beers_favourite.FavouriteBeersFragment"
+        android:name="com.dimidroid.beerscatalog.ui.beers_favourite.BeersFavouriteFragment"
         android:label="@string/title_favourite_beers"
         tools:layout="@layout/fragment_favourite_beers" >
         <action
