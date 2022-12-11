@@ -11,8 +11,8 @@
         android:label="@string/title_beers_catalog"
         tools:layout="@layout/fragment_beers_catalog" >
         <action
-            android:id="@+id/action_navigation_beers_catalog_to_beersDetailsFragment2"
-            app:destination="@id/beersDetailsFragment2" />
+            android:id="@+id/action_navigation_beers_catalog_to_beersDetailsFragment"
+            app:destination="@id/beersDetailsFragment" />
     </fragment>
 
     <fragment
@@ -21,11 +21,11 @@
         android:label="@string/title_favourite_beers"
         tools:layout="@layout/fragment_favourite_beers" >
         <action
-            android:id="@+id/action_navigation_favourite_beers_to_beersDetailsFragment2"
-            app:destination="@id/beersDetailsFragment2" />
+            android:id="@+id/action_navigation_favourite_beers_to_beersDetailsFragment"
+            app:destination="@id/beersDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/beersDetailsFragment2"
+        android:id="@+id/beersDetailsFragment"
         android:name="com.dimidroid.beerscatalog.ui.beers_details.BeersDetailsFragment"
         android:label="fragment_beers_details"
         tools:layout="@layout/fragment_beers_details" />

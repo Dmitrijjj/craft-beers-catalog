@@ -1,5 +1,6 @@
 package com.dimidroid.beerscatalog.adapters
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +17,11 @@ import com.dimidroid.beerscatalog.models.BeerResponseItem
 class BeersAdapter: RecyclerView.Adapter<BeersAdapter.BeersViewHolder>() {
 
     inner class BeersViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val beerImage: ImageView
-        val beerName: TextView
-        val beerAbv: TextView
-        val iconFavourite: ImageView
-        init {
-            beerImage = itemView.findViewById<ImageView>(R.id.imageBeer)
-            beerName = itemView.findViewById<TextView>(R.id.nameBeer)
-            beerAbv = itemView.findViewById<TextView>(R.id.abvBeer)
-            iconFavourite = itemView.findViewById(R.id.iconFav)
-        }
+        var beerImage: ImageView = itemView.findViewById(R.id.imageBeer)
+        var beerName: TextView = itemView.findViewById(R.id.nameBeer)
+        var beerAbv: TextView = itemView.findViewById(R.id.abvBeer)
+        var iconFavourite: ImageView = itemView.findViewById(R.id.iconFav)
+
     }
 
     // use diffUtil
@@ -60,7 +56,7 @@ class BeersAdapter: RecyclerView.Adapter<BeersAdapter.BeersViewHolder>() {
         holder.apply {
             Glide.with(itemView.context).load(beerItem.imageUrl).into(beerImage)
             beerName.text = beerItem.name
-            beerAbv.text = beerAbv.toString()
+            beerAbv.text = beerItem.abv.toString()
             iconFavourite.setOnClickListener {
                 beerItem.isFavourite = true
                 iconFavourite.setBackgroundColor(Color.BLACK)

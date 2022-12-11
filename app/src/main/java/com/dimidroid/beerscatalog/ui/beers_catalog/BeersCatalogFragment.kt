@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,10 +20,10 @@ import com.dimidroid.beerscatalog.util.Resource
 class BeersCatalogFragment : Fragment() {
 
     lateinit var viewModel: BeersCatalogViewModel
-    lateinit var adapter: BeersAdapter
+    lateinit var beersAdapter: BeersAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var progressBar: ProgressBar
-    lateinit var searchView: SearchView
+    //lateinit var searchView: SearchView
     val TAG = "BeersCatalogFragment"
 
     override fun onCreateView(
@@ -32,27 +31,27 @@ class BeersCatalogFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_beers_catalog, container, false)
+        val view = inflater.inflate(R.layout.fragment_beers_catalog, container, false)
+        setUIElements(view)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+
         val repository = BeersRepository(BeersDatabase(requireContext()))
         val viewModelProviderFactory = CatalogViewModelProviderFactory(repository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[BeersCatalogViewModel::class.java]
 
-        recyclerView = view.findViewById(R.id.recyclerViewCatalog)
-        progressBar = view.findViewById(R.id.paginationProgressBar)
-        searchView = view.findViewById(R.id.searchView)
-        setupRecyclerView()
 
         viewModel.craftBeer.observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is Resource.Success ->{
                     hideProgressBar()
                     response.data?.let { beersResponse ->
-                        adapter.differ.submitList(beersResponse)
+                        beersAdapter.differ.submitList(beersResponse)
                     }
                 }
                 is Resource.Error -> {
@@ -68,6 +67,12 @@ class BeersCatalogFragment : Fragment() {
         })
     }
 
+    private fun setUIElements(view: View){
+        recyclerView = view.findViewById(R.id.recyclerViewCatalog)
+        progressBar = view.findViewById(R.id.paginationProgressBar)
+        //searchView = view.findViewById(R.id.searchView)
+    }
+
     private fun hideProgressBar() {
         progressBar.visibility = View.INVISIBLE
     }
@@ -77,12 +82,9 @@ class BeersCatalogFragment : Fragment() {
     }
 
     private fun setupRecyclerView(){
-        adapter = BeersAdapter()
-        recyclerView.apply {
-            adapter = adapter
-            layoutManager = LinearLayoutManager(activity)
-            setHasFixedSize(true)
-        }
+        beersAdapter = BeersAdapter()
+        recyclerView.adapter = beersAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
 

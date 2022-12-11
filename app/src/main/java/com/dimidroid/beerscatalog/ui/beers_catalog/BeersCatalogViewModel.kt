@@ -14,9 +14,13 @@ class BeersCatalogViewModel(
 ): ViewModel() {
 
     val craftBeer: MutableLiveData<Resource<BeerResponse>> = MutableLiveData()
-    val craftBeerPage = 1
+    private val craftBeerPage = 1
 
-    fun getBeers() = viewModelScope.launch {
+    init {
+        getBeers()
+    }
+
+    private fun getBeers() = viewModelScope.launch {
         craftBeer.postValue(Resource.Loading())
         val response = repository.getBeers(craftBeerPage)
         craftBeer.postValue(handleBeersResponse(response))
