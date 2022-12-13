@@ -27,7 +27,8 @@ class BeersActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_beers_catalog, R.id.navigation_favourite_beers
+                R.id.navigation_beers_catalog, R.id.navigation_favourite_beers,
+                R.id.navigation_search_beers
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

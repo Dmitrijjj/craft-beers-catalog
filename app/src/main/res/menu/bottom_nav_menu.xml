@@ -11,4 +11,9 @@
         android:icon="@drawable/ic_favourite_beers"
         android:title="@string/title_favourite_beers" />
 
+    <item
+        android:id="@+id/navigation_search_beers"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/title_search_beers" />
+
 </menu>

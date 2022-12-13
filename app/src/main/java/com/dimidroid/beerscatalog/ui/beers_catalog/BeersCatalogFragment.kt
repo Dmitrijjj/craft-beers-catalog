@@ -4,22 +4,21 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dimidroid.beerscatalog.R
-import com.dimidroid.beerscatalog.adapters.BeersAdapter
+import com.dimidroid.beerscatalog.adapters.BeersCatalogAdapter
 import com.dimidroid.beerscatalog.db.BeersDatabase
 import com.dimidroid.beerscatalog.repository.BeersRepository
 import com.dimidroid.beerscatalog.util.Resource
 
-class BeersCatalogFragment : Fragment(), MenuProvider{
+class BeersCatalogFragment : Fragment(){
 
     private lateinit var viewModel: BeersCatalogViewModel
-    lateinit var beersAdapter: BeersAdapter
+    lateinit var beersCatalogAdapter: BeersCatalogAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var progressBar: ProgressBar
     //lateinit var searchView: SearchView
@@ -37,7 +36,6 @@ class BeersCatalogFragment : Fragment(), MenuProvider{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.addMenuProvider(this, viewLifecycleOwner)
 
         val repository = BeersRepository(BeersDatabase(requireContext()))
         val viewModelProviderFactory = CatalogViewModelProviderFactory(repository)
@@ -50,7 +48,7 @@ class BeersCatalogFragment : Fragment(), MenuProvider{
                 is Resource.Success ->{
                     hideProgressBar()
                     response.data?.let { beersResponse ->
-                        beersAdapter.differ.submitList(beersResponse)
+                        beersCatalogAdapter.differ.submitList(beersResponse)
                     }
                 }
                 is Resource.Error -> {
@@ -64,28 +62,6 @@ class BeersCatalogFragment : Fragment(), MenuProvider{
                 }
             }
         })
-    }
-
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.search_menu, menu)
-        val item = menu.findItem(R.id.search_action);
-        val searchView = item?.actionView as androidx.appcompat.widget.SearchView
-
-        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                beersAdapter.filter.filter(newText)
-                return true
-            }
-        })
-
-    }
-
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return false
     }
 
     private fun setUIElements(view: View){
@@ -103,9 +79,9 @@ class BeersCatalogFragment : Fragment(), MenuProvider{
     }
 
     private fun setupRecyclerView(){
-        beersAdapter = BeersAdapter()
+        beersCatalogAdapter = BeersCatalogAdapter()
         recyclerView.apply {
-            adapter = beersAdapter
+            adapter = beersCatalogAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
     }

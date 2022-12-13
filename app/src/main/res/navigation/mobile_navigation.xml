@@ -25,9 +25,19 @@
             app:destination="@id/beersDetailsFragment" />
     </fragment>
     <fragment
+        android:id="@+id/navigation_search_beers"
+        android:name="com.dimidroid.beerscatalog.ui.beers_search.BeersSearchFragment"
+        android:label="BeersSearchFragment"
+        tools:layout="@layout/fragment_search_beers">
+        <action
+            android:id="@+id/action_beersSearchFragment_to_beersDetailsFragment"
+            app:destination="@id/beersDetailsFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/beersDetailsFragment"
         android:name="com.dimidroid.beerscatalog.ui.beers_details.BeersDetailsFragment"
         android:label="fragment_beers_details"
         tools:layout="@layout/fragment_beers_details" />
+
 
 </navigation>

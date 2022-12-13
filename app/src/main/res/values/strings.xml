@@ -3,4 +3,5 @@
     <string name="title_beers_catalog">Beers Catalog</string>
     <string name="title_favourite_beers">Favourite Beers</string>
     <string name="search_menu_title">Search for Beers</string>
+    <string name="title_search_beers">Search Beers</string>
 </resources>
