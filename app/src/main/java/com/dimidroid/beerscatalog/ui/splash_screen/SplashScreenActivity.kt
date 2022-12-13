@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
-import com.dimidroid.beerscatalog.ui.BeersActivity
+import com.dimidroid.beerscatalog.BeersActivity
 import com.dimidroid.beerscatalog.R
 
 @Suppress("DEPRECATION")

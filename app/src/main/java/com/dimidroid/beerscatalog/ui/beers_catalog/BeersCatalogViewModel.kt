@@ -14,7 +14,7 @@ class BeersCatalogViewModel(
 ): ViewModel() {
 
     val craftBeer: MutableLiveData<Resource<BeerResponse>> = MutableLiveData()
-    private val craftBeerPage = 1
+    private val craftBeerPage = 4
 
     init {
         getBeers()

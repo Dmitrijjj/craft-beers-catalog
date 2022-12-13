@@ -2,10 +2,9 @@ package com.dimidroid.beerscatalog.ui.beers_catalog
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,9 +16,9 @@ import com.dimidroid.beerscatalog.db.BeersDatabase
 import com.dimidroid.beerscatalog.repository.BeersRepository
 import com.dimidroid.beerscatalog.util.Resource
 
-class BeersCatalogFragment : Fragment() {
+class BeersCatalogFragment : Fragment(), MenuProvider{
 
-    lateinit var viewModel: BeersCatalogViewModel
+    private lateinit var viewModel: BeersCatalogViewModel
     lateinit var beersAdapter: BeersAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var progressBar: ProgressBar
@@ -38,13 +37,13 @@ class BeersCatalogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupRecyclerView()
+        activity?.addMenuProvider(this, viewLifecycleOwner)
 
         val repository = BeersRepository(BeersDatabase(requireContext()))
         val viewModelProviderFactory = CatalogViewModelProviderFactory(repository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[BeersCatalogViewModel::class.java]
 
+        setupRecyclerView()
 
         viewModel.craftBeer.observe(viewLifecycleOwner, Observer { response ->
             when(response){
@@ -67,10 +66,32 @@ class BeersCatalogFragment : Fragment() {
         })
     }
 
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.search_menu, menu)
+        val item = menu.findItem(R.id.search_action);
+        val searchView = item?.actionView as androidx.appcompat.widget.SearchView
+
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                beersAdapter.filter.filter(newText)
+                return true
+            }
+        })
+
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return false
+    }
+
     private fun setUIElements(view: View){
         recyclerView = view.findViewById(R.id.recyclerViewCatalog)
         progressBar = view.findViewById(R.id.paginationProgressBar)
-        //searchView = view.findViewById(R.id.searchView)
+        //searchView.queryHint = "Search for Beers"
     }
 
     private fun hideProgressBar() {
@@ -83,9 +104,9 @@ class BeersCatalogFragment : Fragment() {
 
     private fun setupRecyclerView(){
         beersAdapter = BeersAdapter()
-        recyclerView.adapter = beersAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.apply {
+            adapter = beersAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
     }
-
-
 }

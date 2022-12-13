@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.dimidroid.beerscatalog.R
 import com.dimidroid.beerscatalog.db.BeersDatabase
 import com.dimidroid.beerscatalog.repository.BeersRepository
-import com.dimidroid.beerscatalog.ui.BeersViewModelProviderFactory
 
 class BeersFavouriteFragment : Fragment() {
 
