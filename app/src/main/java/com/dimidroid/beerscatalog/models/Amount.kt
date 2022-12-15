@@ -6,5 +6,5 @@ data class Amount(
     @SerializedName("unit")
     val unit: String,
     @SerializedName("value")
-    val value: Double
+    val value: String
 )

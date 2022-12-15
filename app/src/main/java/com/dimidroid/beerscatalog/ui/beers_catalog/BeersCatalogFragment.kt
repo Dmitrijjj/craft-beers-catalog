@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +22,7 @@ class BeersCatalogFragment : Fragment(){
     lateinit var beersCatalogAdapter: BeersCatalogAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var progressBar: ProgressBar
-    val TAG = "BeersCatalogFragment"
+    private val TAG = "BeersCatalogFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +44,6 @@ class BeersCatalogFragment : Fragment(){
         setupRecyclerView()
 
         beersCatalogAdapter.setOnClickListener {
-            Toast.makeText(requireContext(), "${it.name} selected", Toast.LENGTH_SHORT).show()
             val direction = BeersCatalogFragmentDirections.actionNavigationBeersCatalogToBeersDetailsFragment(it)
             findNavController().navigate(direction)
         }

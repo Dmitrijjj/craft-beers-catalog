@@ -1,4 +1,4 @@
-package com.dimidroid.beerscatalog.ui.beers_favourite
+package com.dimidroid.beerscatalog.ui.beers_details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,13 +6,11 @@ import com.dimidroid.beerscatalog.models.BeerResponseItem
 import com.dimidroid.beerscatalog.repository.BeersRepository
 import kotlinx.coroutines.launch
 
-class BeersFavouriteViewModel(
+class BeersDetailsViewModel(
     val repository: BeersRepository
 ): ViewModel() {
 
-    fun getSavedBeers() = repository.getAllBeers()
-
-    fun deleteSavedBeer(beerResponseItem: BeerResponseItem) = viewModelScope.launch{
-        repository.deleteBeer(beerResponseItem)
+    fun saveBeer(beerItem: BeerResponseItem) = viewModelScope.launch {
+        repository.upsertBeer(beerItem)
     }
 }
