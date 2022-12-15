@@ -14,11 +14,10 @@ class BeersSearchViewModel(
 ): ViewModel() {
 
     val searchCraftBeer: MutableLiveData<Resource<BeerResponse>> = MutableLiveData()
-    private val craftBeerPage = 4
 
     fun searchForBeers(searchQuery: String) = viewModelScope.launch {
         searchCraftBeer.postValue(Resource.Loading())
-        val response = repository.searchForBeers(searchQuery, craftBeerPage)
+        val response = repository.searchForBeers(searchQuery)
         searchCraftBeer.postValue(handleBeersResponse(response))
     }
 

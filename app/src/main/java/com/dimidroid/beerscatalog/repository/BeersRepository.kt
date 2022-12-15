@@ -17,7 +17,7 @@ class BeersRepository(val db: BeersDatabase) {
     suspend fun deleteBeer(beerResponseItem: BeerResponseItem) =
         db.getBeerDao().deleteBeer(beerResponseItem)
 
-    suspend fun searchForBeers(searchQuery: String, pageNum: Int) =
-        RetrofitInstance.api.searchForBeers(searchQuery, pageNum)
+    suspend fun searchForBeers(searchQuery: String) =
+        RetrofitInstance.api.searchForBeers(searchQuery)
 
 }

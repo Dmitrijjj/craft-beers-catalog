@@ -15,10 +15,8 @@ interface BeersApi {
 
     @GET("v2/beers")
     suspend fun searchForBeers(
-        @Query("q")
+        @Query("beer_name")
         searchQuery: String,
-        @Query("page")
-        pageNumber: Int = 1
     ): Response<BeerResponse>
 
 }
