@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 interface BeersApi {
 
-    @GET("v2/beers")
+    @GET("v2/beers?")
     suspend fun getBeers(
-        @Query("page")
+        @Query("per_page")
         pageNumber: Int = 1
     ): Response<BeerResponse>
 
@@ -18,5 +18,4 @@ interface BeersApi {
         @Query("beer_name")
         searchQuery: String,
     ): Response<BeerResponse>
-
 }

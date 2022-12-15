@@ -3,7 +3,6 @@ package com.dimidroid.beerscatalog.ui.beers_search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dimidroid.beerscatalog.repository.BeersRepository
-import com.dimidroid.beerscatalog.ui.beers_favourite.BeersFavouriteViewModel
 
 class BeersSearchViewModelProvider(
     private val beersRepository: BeersRepository

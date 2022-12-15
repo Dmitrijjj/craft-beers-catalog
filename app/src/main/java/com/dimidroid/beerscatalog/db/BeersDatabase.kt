@@ -36,8 +36,6 @@ abstract class BeersDatabase : RoomDatabase() {
                 BeersDatabase::class.java,
                 DATABASE_NAME
             ).build()
-
     }
-
 
 }

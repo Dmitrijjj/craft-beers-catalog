@@ -16,7 +16,6 @@ import com.dimidroid.beerscatalog.R
 import com.dimidroid.beerscatalog.adapters.BeersCatalogAdapter
 import com.dimidroid.beerscatalog.db.BeersDatabase
 import com.dimidroid.beerscatalog.repository.BeersRepository
-import com.dimidroid.beerscatalog.ui.beers_catalog.BeersCatalogFragmentDirections
 
 class BeersFavouriteFragment : Fragment() {
 
