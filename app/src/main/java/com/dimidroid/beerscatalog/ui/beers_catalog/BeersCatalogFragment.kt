@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dimidroid.beerscatalog.R
@@ -21,7 +24,6 @@ class BeersCatalogFragment : Fragment(){
     lateinit var beersCatalogAdapter: BeersCatalogAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var progressBar: ProgressBar
-    //lateinit var searchView: SearchView
     val TAG = "BeersCatalogFragment"
 
     override fun onCreateView(
@@ -42,6 +44,12 @@ class BeersCatalogFragment : Fragment(){
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[BeersCatalogViewModel::class.java]
 
         setupRecyclerView()
+
+        beersCatalogAdapter.setOnClickListener {
+            Toast.makeText(requireContext(), "${it.name} selected", Toast.LENGTH_SHORT).show()
+            val direction = BeersCatalogFragmentDirections.actionNavigationBeersCatalogToBeersDetailsFragment(it)
+            findNavController().navigate(direction)
+        }
 
         viewModel.craftBeer.observe(viewLifecycleOwner, Observer { response ->
             when(response){
@@ -67,7 +75,6 @@ class BeersCatalogFragment : Fragment(){
     private fun setUIElements(view: View){
         recyclerView = view.findViewById(R.id.recyclerViewCatalog)
         progressBar = view.findViewById(R.id.paginationProgressBar)
-        //searchView.queryHint = "Search for Beers"
     }
 
     private fun hideProgressBar() {

@@ -3,7 +3,7 @@ package com.dimidroid.beerscatalog.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-
+import java.io.Serializable
 @Entity(tableName = "beers_table")
 data class BeerResponseItem(
     //for icon in recyclerView
@@ -23,4 +23,4 @@ data class BeerResponseItem(
     val foodPairing: List<String>,
     @SerializedName("ingredients")
     val ingredients: Ingredients
-)
+): Serializable

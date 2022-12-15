@@ -37,7 +37,13 @@
         android:id="@+id/beersDetailsFragment"
         android:name="com.dimidroid.beerscatalog.ui.beers_details.BeersDetailsFragment"
         android:label="fragment_beers_details"
-        tools:layout="@layout/fragment_beers_details" />
+        tools:layout="@layout/fragment_beers_details" >
+        <argument
+            android:name="beer_info"
+            app:argType="com.dimidroid.beerscatalog.models.BeerResponseItem"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
 
 
 </navigation>

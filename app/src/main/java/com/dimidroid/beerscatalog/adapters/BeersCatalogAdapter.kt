@@ -2,6 +2,7 @@ package com.dimidroid.beerscatalog.adapters
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -13,13 +14,24 @@ import com.dimidroid.beerscatalog.models.BeerResponseItem
 
 class BeersCatalogAdapter: RecyclerView.Adapter<BeersCatalogAdapter.BeersViewHolder>() {
 
-    var filteredBeersCatalog: List<BeerResponseItem> = ArrayList()
+    private var onItemClickListener: ((BeerResponseItem) -> Unit)? = null
 
-    inner class BeersViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    fun setOnClickListener(listener: (BeerResponseItem) -> Unit){
+        onItemClickListener = listener
+    }
+
+    inner class BeersViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), OnClickListener{
         var beerImage: ImageView = itemView.findViewById(R.id.imageBeer)
         var beerName: TextView = itemView.findViewById(R.id.nameBeer)
         var beerAbv: TextView = itemView.findViewById(R.id.abvBeer)
-        var iconFavourite: ImageView = itemView.findViewById(R.id.iconFav)
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            onItemClickListener?.let { it(differ.currentList[adapterPosition]) }
+        }
+
     }
     // use diffUtil against notifydatasetchanged
     private val differCallback = object : DiffUtil.ItemCallback<BeerResponseItem>(){
@@ -54,15 +66,10 @@ class BeersCatalogAdapter: RecyclerView.Adapter<BeersCatalogAdapter.BeersViewHol
             Glide.with(itemView.context).load(beerItem.imageUrl).into(beerImage)
             beerName.text = beerItem.name
             beerAbv.text = beerItem.abv.toString()
-            iconFavourite.setOnClickListener {
-                //handleSavingBeer(differ.currentList, position, beerItem.imageUrl,
-                    //beerItem.name, beerItem.abv.toString())
-            }
         }
     }
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-
 
 }

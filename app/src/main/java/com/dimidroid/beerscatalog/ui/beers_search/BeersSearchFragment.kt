@@ -16,8 +16,6 @@ import com.dimidroid.beerscatalog.adapters.BeersSearchAdapter
 import com.dimidroid.beerscatalog.db.BeersDatabase
 import com.dimidroid.beerscatalog.models.BeerResponseItem
 import com.dimidroid.beerscatalog.repository.BeersRepository
-import com.dimidroid.beerscatalog.ui.beers_catalog.BeersCatalogViewModel
-import com.dimidroid.beerscatalog.ui.beers_catalog.CatalogViewModelProviderFactory
 import com.dimidroid.beerscatalog.util.Resource
 import okhttp3.internal.notifyAll
 
